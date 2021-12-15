@@ -4,7 +4,7 @@ from poll.models import Question
 
 def index(request):
     #return HttpResponse("Welcome~ 환영합니다!!")
-    # db에 있는 모든 데이터 조회하기(select)
+    #db에 있는 모든 데이터 조회하기(select)
     question_list = Question.objects.all() 
     return render(request, 'poll/index.html', {'question_list' : question_list})
 

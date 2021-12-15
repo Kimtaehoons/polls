@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>설문 상세 페이지</title>
+    <link rel="stylesheet" href="{% static 'poll/css/style.css' %}">
 </head>
 <body>
-    <h2>{{ question.question_text }}</h2>
-    <ul>
-        {% for choice in question.choice_set.all %} <!-- 질문을 가져와서 -->
-        <li>{{ choice.choice_text }}</li> <!-- choice에 담아서 정답 불러오기 -->
-        {% endfor %}
-    </ul>
+    <div id="container">
+        <section>
+            <h2>{{ question.question_text }}</h2>
+            <ul>
+                {% for choice in question.choice_set.all %} <!-- 질문을 가져와서 -->
+                <li>{{ choice.choice_text }}</li> <!-- choice에 담아서 정답 불러오기 -->
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
 </body>
 </html>

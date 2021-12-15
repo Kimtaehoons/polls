@@ -11,7 +11,7 @@ class Question(models.Model):
 class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE) #외래키
+    question = models.ForeignKey(Question, on_delete=models.CASCADE) #외래키(질문에 대한 답변이므로), CASCADE(관계가 맺어졌기 때문에 질문이 사라지면 답변도 같이 삭제되게끔)
 
     def __str__(self):
         return self.choice_text
