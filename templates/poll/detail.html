@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,12 +9,20 @@
 <body>
     <div id="container">
         <section>
-            <h2>{{ question.question_text }}</h2>
-            <ul>
+            <form action="{% url 'poll:vote' question.id %}" method="post">
+                {% csrf_token %}
+                <h2>{{ question.question_text }}</h2>
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
                 {% for choice in question.choice_set.all %} <!-- 질문을 가져와서 -->
-                <li>{{ choice.choice_text }}</li> <!-- choice에 담아서 정답 불러오기 -->
+                <p>
+                    <input type="radio" name="choice" id="choice" value="{{ choice.id }}"> <!-- 버튼이 먼저나오게 하기 -->
+                    <label for="choice">{{ choice.choice_text }}</label> <!-- choice에 레이블에 답변 담아서 불러오기 -->
+                </p>
                 {% endfor %}
-            </ul>
+                <p><input type="submit" value="투표"></p> <!-- 불러온 것 전송 -->
+            </form>
         </section>
     </div>
 </body>
