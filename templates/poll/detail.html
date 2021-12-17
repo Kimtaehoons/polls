@@ -4,19 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>설문 상세 페이지</title>
-    <link rel="stylesheet" href="{% static 'poll/css/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'poll/css/style.css' %}"> bootstrap활용에 따른 삭제-->
+    <link rel="stylesheet" href="{% static 'poll/css/bootstrap.css' %}">
 </head>
 <body>
-    <div id="container">
+    <div class="container">
         <section>
-            <form action="{% url 'poll:vote' question.id %}" method="post">
+            <div class="jumbotron">
+                <div class="text-center">
+                    <h1>투표 하기</h1>
+                </div>
+            </div>
+            <h4 style="margin: 20px 280px">{{ question.question_text }}</h4>
+            <form action="{% url 'poll:vote' question.id %}" method="post"
+                  style="width: 500px; margin: 0 auto;"> <!-- 객체가 있어야 여백설정이 되므로 width값 설정 필요 -->
                 {% csrf_token %}
-                <h2>{{ question.question_text }}</h2>
                 {% if error %}
-                    <p>{{ error }}</p>
+                    <p style="font-size: 1.2rem">{{ error }}</p>
                 {% endif %}
                 {% for choice in question.choice_set.all %} <!-- 질문을 가져와서 -->
-                <p>
+                <p style="font-size: 1.2rem">
                     <input type="radio" name="choice" id="choice" value="{{ choice.id }}"> <!-- 버튼이 먼저나오게 하기 -->
                     <label for="choice">{{ choice.choice_text }}</label> <!-- choice에 레이블에 답변 담아서 불러오기 -->
                 </p>
